@@ -1,62 +1,27 @@
 public class Moneda {
 
-    public static double solAEuros(double valor) {
+    private String base_code;
+    private String target_code;
+    private Double conversion_result;
 
-       double resultado = valor / 4.0;
-        return resultado;
+    public String getBase() {
+        return base_code;
     }
 
-    public static double solADollar(double valor) {
-
-        double resultado = valor / 3.70;
-        return resultado;
+    public String getTarget() {
+        return target_code;
     }
 
-    public static double solALibra(double valor) {
-
-        double resultado = valor /4.62;
-        return resultado;
+    public Double getConversion() {
+        return conversion_result;
     }
 
-    public static double solAYen(double valor) {
+/*
+    public static double convertir(String base, String target,double ratio, double cantidad) {
 
-        double resultado = valor * 41.97;
+        double resultado = cantidad*ratio;
         return resultado;
     }
+*/
 
-    public static double solAWon(double valor) {
-
-        double resultado = valor * 371.45;
-        return resultado;
-    }
-
-    public static double euroASol(double valor) {
-
-        double resultado = valor * 4.00;
-        return resultado;
-    }
-
-    public static double dolarASol(double valor) {
-
-        double resultado = valor * 3.70;
-        return resultado;
-    }
-
-    public static double libraASol(double valor) {
-
-        double resultado = valor * 4.62;
-        return resultado;
-    }
-
-    public static double yenASol(double valor) {
-
-        double resultado = valor / 41.97;
-        return resultado;
-    }
-
-    public static double wonASol(double valor) {
-
-        double resultado = valor / 371.47;
-        return resultado;
-    }
 }

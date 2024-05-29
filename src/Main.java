@@ -1,4 +1,10 @@
+import com.google.gson.Gson;
 import javax.swing.JOptionPane;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.URI;
+import java.net.http.HttpResponse;
+import java.io.IOException;
 
 public class Main {
 
@@ -23,9 +29,12 @@ public class Main {
     }
 
 
+
     // Método para convertir monedas
     public static void convertirMonedas() {
         // Opciones para la conversión de monedas
+        String json="";
+
         Object[] opcionesMonedas = {"Sol a Euros", "Sol a Dolar", "Sol a Libras esterlinas", "Sol a Yen Japones", "Sol a Won", "Euros a Sol", "Dolar a Sol", "Yen Japones a Sol", "Won a Sol"};
 
         // Mostrar el cuadro de diálogo para la conversión de monedas
@@ -34,30 +43,118 @@ public class Main {
 
         // Aquí iría el código para realizar la conversión de monedas según la selección
         if (seleccionMonedas != null) {
+
             // Solicitar al usuario que ingrese la cantidad a convertir (validando que sea un número)
             double cantidad = obtenerNumero("Ingrese la cantidad a convertir:");
 
             // Realizar la conversión según la opción seleccionada
             double resultado = 0;
+            HttpClient client=HttpClient.newHttpClient();
             if (seleccionMonedas.equals("Sol a Euros")) {
-                resultado = Moneda.solAEuros(cantidad);
+
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/PEN/EUR/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Sol a Dolar")) {
-                resultado = Moneda.solADollar(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/PEN/USD/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Sol a Libras esterlinas")) {
-                resultado = Moneda.solALibra(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/PEN/GBP/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Sol a Yen Japones")) {
-                resultado = Moneda.solAYen(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/PEN/JPY/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Sol a Won")) {
-                resultado = Moneda.solAWon(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/PEN/KRW/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Euros a Sol")) {
-                resultado = Moneda.euroASol(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/EUR/PEN/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Dolar a Sol")) {
-                resultado = Moneda.dolarASol(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/USD/PEN/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Yen Japones a Sol")) {
-                resultado = Moneda.yenASol(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/JPY/PEN/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (seleccionMonedas.equals("Won a Sol")) {
-                resultado = Moneda.wonASol(cantidad);
+                HttpRequest request= HttpRequest.newBuilder()
+                        .uri(URI.create("https://v6.exchangerate-api.com/v6/128723ceb019820b7dd67fcb/pair/KRW/PEN/"+cantidad))
+                        .build();
+                try {
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    json=response.body();
+                    //  System.out.println(json);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+
+            Gson gson=new Gson();
+            Moneda ratio= gson.fromJson(json,Moneda.class);
+            resultado=ratio.getConversion();
 
             JOptionPane.showMessageDialog(null, "El resultado es: " + resultado);
 
